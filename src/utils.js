@@ -348,6 +348,9 @@ function splitElements(raw) {
 */
 function getScope(data, elements=[]) {
 	for (let elt of elements) {
+		if (elt == '__proto__')
+			continue
+			
 		if (data === undefined)
 			data = lastData[lastElt] = {}
 
