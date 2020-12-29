@@ -348,7 +348,7 @@ function splitElements(raw) {
 */
 function getScope(data, elements=[]) {
 	for (let elt of elements) {
-		if (elt == '__proto__')
+		if (isPrototypePolluted(elt))
 			continue
 			
 		if (data === undefined)
@@ -390,4 +390,11 @@ function getScopeAndKey(data, elements=[]) {
 	}
 
 	return [data, key]
+}
+
+/**
+ * Blacklist certain keys to prevent Prototype Pollution
+ */
+function isPrototypePolluted(key) {
+    return ['__proto__', 'constructor', 'prototype'].includes(key)
 }
